@@ -47,18 +47,22 @@ Clock.prototype.renderClock = function() {
     this.renderClock();
 };
 
-
+function Clock3(timezone, elementId) {
+Clock.call(this, timezone, elementId);
+};
+Clock3.prototype = Object.create(Clock.prototype);
+Clock3.prototype.constructor = Clock3;
 
 function NewDate(timezone, elementId) {
 Clock.call(this, timezone, elementId);
 var d = new Date();
-var dataYear = d.toUTCString();
+var dataToday = d.toUTCString();
 var k = new Date();
 var fullYear = k.getFullYear();
 
 NewDate.prototype.renderClock = function() {
             if(this.clockModeShort){
-                timeHtml =  dataYear;
+                timeHtml =  dataToday;
             }
             else {
                 timeHtml =  fullYear;
@@ -106,15 +110,20 @@ NewClock.prototype.constructor = NewClock;
 
 
 function createClock() {
-    var clock1 = new Clock("America/New_York", "clock1Id");
+    var clock1;
+    var clock2;
+    var clock3;
+    var clock4;
+    var clock5;
+    clock1 = new Clock("America/New_York", "clock1Id");
     clock1.renderClock();
-    var clock2 = new Clock("Europe/London", "clock2Id");
+    clock2 = new Clock("Europe/London", "clock2Id");
     clock2.renderClock();
-    var clock3 = new Clock("UTC", "clock3Id");
+    clock3 = new Clock3("UTC", "clock3Id");
     clock3.renderClock();
-    var clock4 = new NewDate("America/New_York", "clock4Id");
+    clock4 = new NewDate("America/New_York", "clock4Id");
     clock4.renderClock();
-    var clock5 = new NewClock("UTC", "clock5Id");
+    clock5 = new NewClock("UTC", "clock5Id");
     clock5.renderClock();
 };
 
